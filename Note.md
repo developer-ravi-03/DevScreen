@@ -28,3 +28,7 @@
 
 - npm install @stream-io/video-react-sdk
 - npm install @stream-io/node-sdk
+
+8. authentication setup in convex with clerk
+
+- https://docs.convex.dev/auth/clerk
