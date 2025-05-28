@@ -23,3 +23,8 @@
 6. run convex for backend
 
 - npx convex dev
+
+7. Get Stream setup for video call
+
+- npm install @stream-io/video-react-sdk
+- npm install @stream-io/node-sdk
