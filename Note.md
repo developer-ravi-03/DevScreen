@@ -32,3 +32,8 @@
 8. authentication setup in convex with clerk
 
 - https://docs.convex.dev/auth/clerk
+
+9. create webhook in clerk
+
+- https://different-kingfisher-486.convex.site/clerk-webhook
+- created user.ts and http.js also setup svix webhook to send registerd user data to the convex
