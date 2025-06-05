@@ -37,3 +37,19 @@
 
 - https://different-kingfisher-486.convex.site/clerk-webhook
 - created user.ts and http.js also setup svix webhook to send registerd user data to the convex
+
+10. create all schema, mutation and query
+
+- schema has been created
+- along with users.ts, interview.ts and comments.ts are created and write query there
+
+11. create darkmode and light mode toggle
+
+- go to shad cn website
+- search for dar mode
+- install next theme - npm install next-themes
+- create theme provider
+- import theme provider in layout.tsx
+- create mode toggle compont in ui folder
+- install dropdown- menu from shade cn
+- import mode toggle in navbar
