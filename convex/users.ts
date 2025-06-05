@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
+//create the user
 export const syncUser = mutation({
   args: {
     name: v.string(),
@@ -26,6 +27,7 @@ export const syncUser = mutation({
   },
 });
 
+//for get all user
 export const getUsers = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -37,6 +39,7 @@ export const getUsers = query({
   },
 });
 
+//get specific user by clerk id
 export const getUserByClerkId = query({
   args: { clerkId: v.string() },
   handler: async (ctx, args) => {
