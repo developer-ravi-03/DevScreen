@@ -57,3 +57,5 @@
 12. create navbar and update layout on the basis of signin or signup
 
 - done all the components
+
+13. home page created
