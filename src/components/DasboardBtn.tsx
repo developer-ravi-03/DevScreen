@@ -6,14 +6,13 @@ import { SparklesIcon } from "lucide-react";
 import { useUserRole } from "@/hooks/useUserRole";
 
 function DasboardBtn() {
-  const isCandidate = false;
-  const isInterviewer = false;
+  const { isCandidate, isLoading } = useUserRole();
 
-  if (isCandidate) return null;
+  if (isCandidate || isLoading) return null;
 
   return (
     <Link href={"/dashboard"}>
-      <Button className="gap-1 font-medium" size={"sm"}>
+      <Button className="gap-2 font-medium" size={"sm"}>
         <SparklesIcon className="size-4" />
         Dashboard
       </Button>
