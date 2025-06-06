@@ -53,3 +53,7 @@
 - create mode toggle compont in ui folder
 - install dropdown- menu from shade cn
 - import mode toggle in navbar
+
+12. create navbar and update layout on the basis of signin or signup
+
+- done all the components
