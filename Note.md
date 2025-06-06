@@ -59,3 +59,10 @@
 - done all the components
 
 13. home page created
+
+14. stream clientProvider created
+
+- stream client provider
+- stram action
+- layout created for whole root
+- if i create in main root than than it also applied on admin folder so create it in root folder
