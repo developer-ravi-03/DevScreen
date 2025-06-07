@@ -21,6 +21,8 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
+import EndCallButton from "./EndCallButton";
+import CodeEditor from "./CodeEditor";
 // import EndCallButton from "./EndCallButton";
 // import CodeEditor from "./CodeEditor";
 
@@ -96,8 +98,7 @@ function MeetingRoom() {
                     <UsersIcon className="size-4" />
                   </Button>
 
-                  <button>end</button>
-                  {/* <EndCallButton /> */}
+                  <EndCallButton />
                 </div>
               </div>
             </div>
@@ -107,8 +108,7 @@ function MeetingRoom() {
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={65} minSize={25}>
-          {/* <CodeEditor /> */}
-          <p>code editor</p>
+          <CodeEditor />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

@@ -66,3 +66,9 @@
 - stram action
 - layout created for whole root
 - if i create in main root than than it also applied on admin folder so create it in root folder
+
+15. download code editor for use this in our project
+
+- npm i @monaco-editor/react
+- after that download some more components
+- npx shadcn@latest add scroll-area select
