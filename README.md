@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevScreen - Online interview Platform
 
-## Getting Started
+DevScreen is a modern, full-stack platform designed for conducting remote technical interviews with real-time video capabilities. Built with Next.js, Tailwind CSS, TypeScript, and powered by GetStream, Convex, and Clerk, it offers a seamless and secure interview experience. Also code editor are available for writing code.
 
-First, run the development server:
+## 🚀 Features
+
+- 💻 Built with **Next.js** and **TypeScript** for performance and type safety.
+- 🎨 Styled using **Tailwind CSS** for rapid and responsive UI development.
+- 🎞️ Smooth animations with **Framer Motion**.
+- 🔐 Secure authentication using **Clerk**.
+- 📡 Real-time video calling powered by **GetStream**.
+- 📦 Backend logic and data persistence handled with **Convex**.
+
+## 📸 ScreenShots
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology    | Purpose              |
+| ------------- | -------------------- |
+| Next.js       | Frontend framework   |
+| TypeScript    | Type-safe JavaScript |
+| Tailwind CSS  | Styling              |
+| Framer Motion | Animations           |
+| Clerk         | Authentication       |
+| Convex        | Serverless backend   |
+| GetStream     | Real-time video SDK  |
+
+## 🔗 Live Demo
+
+👉 [Visit DevScreen on Vercel](https://dev-screen-seven.vercel.app/)
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/developer-ravi-03/DevScreen.git
+
+cd DevScreen
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a .env.local file in the root directory and add necessary API keys for:
+
+```bash
+//Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+//Convex
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
+
+//GetScreen
+NEXT_PUBLIC_STREAM_API_KEY=
+STREAM_SECRET_KEY=
+```
+
+### 4. Run the backend server
+
+```bash
+npx convex dev
+```
+
+### 5. Run the server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 👋 Connect with Me
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 🔗 **LinkedIn** - [ItzRavi](https://www.linkedin.com/in/itzravi/)
+- 🌐 **Portfolio** - [Ravi Kumar](https://portfolio-website-next-hazel.vercel.app/)
