@@ -24,8 +24,8 @@ import {
 import { Loader2Icon, XIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
-// import MeetingCard from "@/components/MeetingCard";
 import UserInfo from "@/components/UserInfo";
+import MeetingCard from "@/components/MeetingCard";
 
 function InterviewScheduleUI() {
   const client = useStreamVideoClient();
@@ -312,7 +312,7 @@ function InterviewScheduleUI() {
       </div>
 
       {/* LOADING STATE & MEETING CARDS */}
-      {/* {!interviews ? (
+      {!interviews ? (
         <div className="flex justify-center py-12">
           <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
         </div>
@@ -328,7 +328,7 @@ function InterviewScheduleUI() {
         <div className="text-center py-12 text-muted-foreground">
           No interviews scheduled
         </div>
-      )} */}
+      )}
     </div>
   );
 }
