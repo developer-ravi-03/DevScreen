@@ -19,10 +19,10 @@ export const syncUser = mutation({
 
     if (existingUser) return;
 
-    //else create new user
+    //else create new user with interviewer
     return await ctx.db.insert("users", {
       ...args,
-      role: "candidate",
+      role: "interviewer",
     });
   },
 });
