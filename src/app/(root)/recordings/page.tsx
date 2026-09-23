@@ -34,17 +34,17 @@ function RecordingPage() {
   if (isLoading) return <LoaderUI />;
 
   return (
-    <div className="container max-w-7xl mx-auto p-6">
+    <div className="mx-auto min-h-[calc(100vh-4rem)] max-w-7xl px-1 py-8 sm:py-10">
       {/* HEADER SECTION */}
-      <h1 className="text-3xl font-bold">Recordings</h1>
-      <p className="text-muted-foreground my-1">
+      <h1 className="text-3xl font-semibold tracking-tight text-foreground">Recordings</h1>
+      <p className="my-2 text-sm text-muted-foreground">
         {recordings.length}{" "}
         {recordings.length === 1 ? "recording" : "recordings"} available
       </p>
 
       {/* RECORDINGS GRID */}
 
-      <ScrollArea className="h-[calc(100vh-12rem)] mt-3">
+      <ScrollArea className="mt-7 h-[calc(100vh-12rem)]">
         {recordings.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pb-6">
             {recordings.map((r) => (
@@ -52,8 +52,8 @@ function RecordingPage() {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-            <p className="text-xl font-medium text-muted-foreground">
+          <div className="surface-card flex h-[400px] flex-col items-center justify-center gap-4 rounded-2xl">
+            <p className="text-lg font-medium text-foreground">
               No recordings available
             </p>
           </div>

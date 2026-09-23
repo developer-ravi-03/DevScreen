@@ -37,29 +37,29 @@ function RoleSelectionModal() {
   return (
     <Dialog open>
       <DialogContent
-        className="sm:max-w-[620px]"
+        className="sm:max-w-[620px] border-border bg-background shadow-xl"
         onPointerDownOutside={(event) => event.preventDefault()}
         onEscapeKeyDown={(event) => event.preventDefault()}
       >
         <DialogHeader>
-          <DialogTitle className="text-2xl">Choose your DevScreen role</DialogTitle>
+          <DialogTitle className="text-2xl font-semibold tracking-tight text-foreground">Choose your DevScreen role</DialogTitle>
         </DialogHeader>
 
-        <div className="grid gap-4 md:grid-cols-2 pt-4">
+        <div className="grid gap-4 pt-4 md:grid-cols-2">
           <button type="button" onClick={() => setSelectedRole("candidate")} className="text-left">
             <Card className={[
-              "h-full border-2 transition-all",
+              "h-full rounded-2xl border-2 transition-all",
               selectedRole === "candidate"
-                ? "border-primary shadow-md"
-                : "border-border hover:border-primary/40",
+                ? "border-indigo-400/50 bg-indigo-500/[0.07] shadow-xl shadow-indigo-950/20"
+                : "border-border bg-card hover:border-indigo-300/40",
             ].join(" ")}>
               <CardContent className="p-6 space-y-4">
-                <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Code2Icon className="size-6 text-primary" />
+                <div className="grid size-12 place-items-center rounded-xl bg-indigo-400/10">
+                  <Code2Icon className="size-6 text-indigo-200" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Candidate</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <h3 className="font-semibold text-lg text-foreground">Candidate</h3>
+                  <p className="text-sm leading-6 text-muted-foreground mt-1">
                     Attend interviews scheduled for you and join assigned sessions.
                   </p>
                 </div>
@@ -69,18 +69,18 @@ function RoleSelectionModal() {
 
           <button type="button" onClick={() => setSelectedRole("interviewer")} className="text-left">
             <Card className={[
-              "h-full border-2 transition-all",
+              "h-full rounded-2xl border-2 transition-all",
               selectedRole === "interviewer"
-                ? "border-primary shadow-md"
-                : "border-border hover:border-primary/40",
+                ? "border-indigo-400/50 bg-indigo-500/[0.07] shadow-xl shadow-indigo-950/20"
+                : "border-white/10 bg-white/[0.02] hover:border-indigo-300/25",
             ].join(" ")}>
               <CardContent className="p-6 space-y-4">
-                <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <BriefcaseBusinessIcon className="size-6 text-primary" />
+                <div className="grid size-12 place-items-center rounded-xl bg-indigo-400/10">
+                  <BriefcaseBusinessIcon className="size-6 text-indigo-200" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Interviewer</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <h3 className="font-semibold text-lg text-foreground">Interviewer</h3>
+                  <p className="text-sm leading-6 text-slate-400 mt-1">
                     Schedule interviews, select candidates and interviewers, and submit feedback.
                   </p>
                 </div>

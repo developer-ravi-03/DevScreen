@@ -79,16 +79,16 @@ function DashboardPage() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent">
       {/* Header Section */}
-      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+      <div className="sticky top-16 z-40 border-b border-white/10 bg-background/90 backdrop-blur-xl">
         <div className="container mx-auto px-6 py-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-1">
-              <h1 className="text-3xl font-bold tracking-tight">
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground">
                 Interview Dashboard
               </h1>
-              <p className="text-muted-foreground text-lg">
+              <p className="text-base text-muted-foreground">
                 Manage and track all your interviews
               </p>
             </div>
@@ -106,7 +106,7 @@ function DashboardPage() {
       <div className="container mx-auto px-6 py-8 space-y-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="hover:shadow-md transition-shadow">
+          <Card className="transition-all hover:-translate-y-0.5 hover:border-indigo-300/20 hover:shadow-xl hover:shadow-indigo-950/10">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
@@ -115,14 +115,14 @@ function DashboardPage() {
                   </p>
                   <p className="text-3xl font-bold">{totalInterviews}</p>
                 </div>
-                <div className="p-3 bg-primary/10 rounded-full">
+                <div className="grid size-11 place-items-center rounded-xl bg-indigo-400/10">
                   <UsersIcon className="h-6 w-6 text-primary" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="hover:shadow-md transition-shadow">
+          <Card className="transition-all hover:-translate-y-0.5 hover:border-indigo-300/20 hover:shadow-xl hover:shadow-indigo-950/10">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
@@ -131,14 +131,14 @@ function DashboardPage() {
                   </p>
                   <p className="text-3xl font-bold">{completedInterviews}</p>
                 </div>
-                <div className="p-3 bg-green-500/10 rounded-full">
+                <div className="grid size-11 place-items-center rounded-xl bg-emerald-400/10">
                   <CheckCircle2Icon className="h-6 w-6 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="hover:shadow-md transition-shadow">
+          <Card className="transition-all hover:-translate-y-0.5 hover:border-indigo-300/20 hover:shadow-xl hover:shadow-indigo-950/10">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
@@ -154,7 +154,7 @@ function DashboardPage() {
                     %
                   </p>
                 </div>
-                <div className="p-3 bg-blue-500/10 rounded-full">
+                <div className="grid size-11 place-items-center rounded-xl bg-blue-400/10">
                   <TrendingUpIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
@@ -193,7 +193,7 @@ function DashboardPage() {
                         return (
                           <Card
                             key={interview._id}
-                            className="group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 border-border/40 hover:border-border"
+                            className="group transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300/20 hover:shadow-xl hover:shadow-indigo-950/15"
                           >
                             {/* CANDIDATE INFO */}
                             <CardHeader className="pb-3">
@@ -222,7 +222,7 @@ function DashboardPage() {
                             <CardContent className="py-3">
                               <div className="flex items-center gap-4">
                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                  <div className="p-1.5 bg-muted rounded-md">
+                                  <div className="p-1.5 rounded-md bg-white/[0.04]">
                                     <CalendarIcon className="h-3.5 w-3.5" />
                                   </div>
                                   <span className="font-medium">
@@ -230,7 +230,7 @@ function DashboardPage() {
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                  <div className="p-1.5 bg-muted rounded-md">
+                                  <div className="p-1.5 rounded-md bg-white/[0.04]">
                                     <ClockIcon className="h-3.5 w-3.5" />
                                   </div>
                                   <span className="font-medium">
@@ -246,7 +246,7 @@ function DashboardPage() {
                                 <div className="flex gap-2 w-full">
                                   <Button
                                     size="sm"
-                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                                    className="flex-1 bg-green-600 hover:bg-green-700 text-foreground"
                                     onClick={() =>
                                       handleStatusUpdate(
                                         interview._id,

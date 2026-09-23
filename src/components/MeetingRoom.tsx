@@ -36,14 +36,14 @@ function MeetingRoom() {
 
   if (callingState !== CallingState.JOINED) {
     return (
-      <div className="h-96 flex items-center justify-center">
+      <div className="h-96 flex items-center justify-center bg-background">
         <LoaderIcon className="size-6 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="h-[calc(100vh-4rem-1px)]">
+    <div className="h-[calc(100vh-4rem-1px)] bg-[#070c17]">
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           defaultSize={35}
@@ -52,12 +52,12 @@ function MeetingRoom() {
           className="relative"
         >
           {/* VIDEO LAYOUT */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[#070c17]">
             {layout === "grid" ? <PaginatedGridLayout /> : <SpeakerLayout />}
 
             {/* PARTICIPANTS LIST OVERLAY */}
             {showParticipants && (
-              <div className="absolute right-0 top-0 h-full w-[300px] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+              <div className="absolute right-0 top-0 h-full w-[300px] border-l border-white/10 bg-slate-950/95 shadow-2xl backdrop-blur-xl">
                 <CallParticipantsList
                   onClose={() => setShowParticipants(false)}
                 />
@@ -69,7 +69,7 @@ function MeetingRoom() {
 
           <div className="absolute bottom-4 left-0 right-0">
             <div className="flex flex-col items-center gap-4">
-              <div className="flex items-center gap-2 flex-wrap justify-center px-4">
+              <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-white/10 bg-slate-950/85 px-3 py-2 shadow-2xl backdrop-blur-xl">
                 <CallControls onLeave={() => router.push("/")} />
 
                 <div className="flex items-center gap-2">
