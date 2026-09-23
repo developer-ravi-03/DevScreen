@@ -7,16 +7,23 @@ import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { api } from "../../../../convex/_generated/api";
+import { Doc } from "../../../../convex/_generated/dataModel";
+
 import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
 import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 import RoleSelectionModal from "@/components/RoleSelectionModal";
 
+type Interview = Doc<"interviews">;
+
 export default function Home() {
   const router = useRouter();
+
   const { isInterviewer, isLoading, needsRoleSelection } = useUserRole();
+
   const interviews = useQuery(api.interviews.getMyInterviews);
+
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<"start" | "join">();
 
@@ -26,16 +33,20 @@ export default function Home() {
         setModalType("start");
         setShowModal(true);
         break;
+
       case "Join Interview":
         setModalType("join");
         setShowModal(true);
         break;
+
       default:
         router.push(`/${title.toLowerCase()}`);
     }
   };
 
-  if (isLoading) return <LoaderUI />;
+  if (isLoading) {
+    return <LoaderUI />;
+  }
 
   return (
     <div className="container max-w-7xl mx-auto p-6">
@@ -45,6 +56,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
           Welcome back!
         </h1>
+
         <p className="text-muted-foreground mt-2">
           {isInterviewer
             ? "Manage your interviews and review candidates effectively"
@@ -75,6 +87,7 @@ export default function Home() {
         <>
           <div>
             <h1 className="text-3xl font-bold">Your Interviews</h1>
+
             <p className="text-muted-foreground mt-1">
               View and join your scheduled interviews
             </p>
@@ -87,7 +100,7 @@ export default function Home() {
               </div>
             ) : interviews.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {interviews.map((interview) => (
+                {interviews.map((interview: Interview) => (
                   <MeetingCard key={interview._id} interview={interview} />
                 ))}
               </div>

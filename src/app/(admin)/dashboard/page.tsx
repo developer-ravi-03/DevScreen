@@ -51,7 +51,7 @@ function DashboardPage() {
   //status handle pass or fail
   const handleStatusUpdate = async (
     interviewId: Id<"interviews">,
-    status: string
+    status: string,
   ) => {
     try {
       await updateStatus({ id: interviewId, status });
@@ -61,17 +61,21 @@ function DashboardPage() {
     }
   };
 
-  if (isRoleLoading || !isInterviewer || !interviews || !users) return <LoaderUI />;
+  if (isRoleLoading || !isInterviewer || !interviews || !users)
+    return <LoaderUI />;
 
   const groupedInterviews = groupInterviews(interviews);
 
   // Calculate stats
+  // Calculate stats
   const totalInterviews = interviews.length;
+
   const completedInterviews = interviews.filter(
-    (i) => i.status === "completed"
+    (i: Interview) => i.status === "completed",
   ).length;
+
   const successfulInterviews = interviews.filter(
-    (i) => i.status === "succeeded"
+    (i: Interview) => i.status === "succeeded",
   ).length;
 
   return (
@@ -144,7 +148,7 @@ function DashboardPage() {
                   <p className="text-3xl font-bold">
                     {completedInterviews > 0
                       ? Math.round(
-                          (successfulInterviews / completedInterviews) * 100
+                          (successfulInterviews / completedInterviews) * 100,
                         )
                       : 0}
                     %
@@ -182,7 +186,7 @@ function DashboardPage() {
                       (interview: Interview) => {
                         const candidateInfo = getCandidateInfo(
                           users,
-                          interview.candidateId
+                          interview.candidateId,
                         );
                         const startTime = new Date(interview.startTime);
 
@@ -246,7 +250,7 @@ function DashboardPage() {
                                     onClick={() =>
                                       handleStatusUpdate(
                                         interview._id,
-                                        "succeeded"
+                                        "succeeded",
                                       )
                                     }
                                   >
@@ -260,7 +264,7 @@ function DashboardPage() {
                                     onClick={() =>
                                       handleStatusUpdate(
                                         interview._id,
-                                        "failed"
+                                        "failed",
                                       )
                                     }
                                   >
@@ -274,11 +278,11 @@ function DashboardPage() {
                             </CardFooter>
                           </Card>
                         );
-                      }
+                      },
                     )}
                   </div>
                 </section>
-              )
+              ),
           )}
         </div>
 
