@@ -47,13 +47,13 @@ function CodeEditor() {
       {/* QUESTION SECTION */}
       <ResizablePanel>
         <ScrollArea className="h-full">
-          <div className="p-6">
-            <div className="max-w-4xl mx-auto space-y-6">
+          <div className="p-4 sm:p-6">
+            <div className="mx-auto max-w-4xl space-y-5">
               {/* HEADER */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-2xl font-semibold tracking-tight">
+                    <h2 className="text-2xl font-semibold tracking-tight text-foreground">
                       {selectedQuestion.title}
                     </h2>
                   </div>
@@ -112,7 +112,7 @@ function CodeEditor() {
               </div>
 
               {/* PROBLEM DESC. */}
-              <Card>
+              <Card className="border-border">
                 <CardHeader className="flex flex-row items-center gap-2">
                   <BookIcon className="h-5 w-5 text-primary/80" />
                   <CardTitle>Problem Description</CardTitle>
@@ -127,13 +127,13 @@ function CodeEditor() {
               </Card>
 
               {/* PROBLEM EXAMPLES */}
-              <Card>
+              <Card className="border-white/10">
                 <CardHeader className="flex flex-row items-center gap-2">
                   <LightbulbIcon className="h-5 w-5 text-yellow-500" />
                   <CardTitle>Examples</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ScrollArea className="h-full w-full rounded-md border">
+                  <ScrollArea className="h-full w-full rounded-xl border border-white/10 bg-muted/40">
                     <div className="p-4 space-y-4">
                       {selectedQuestion.examples.map((example, index) => (
                         <div key={index} className="space-y-2">
@@ -141,7 +141,7 @@ function CodeEditor() {
                             Example {index + 1}:
                           </p>
                           <ScrollArea className="h-full w-full rounded-md">
-                            <pre className="bg-muted/50 p-3 rounded-lg text-sm font-mono">
+                            <pre className="rounded-lg border border-border bg-muted p-3 font-mono text-sm text-foreground">
                               <div>Input: {example.input}</div>
                               <div>Output: {example.output}</div>
                               {example.explanation && (
@@ -162,7 +162,7 @@ function CodeEditor() {
 
               {/* CONSTRAINTS */}
               {selectedQuestion.constraints && (
-                <Card>
+                <Card className="border-white/10">
                   <CardHeader className="flex flex-row items-center gap-2">
                     <AlertCircleIcon className="h-5 w-5 text-blue-500" />
                     <CardTitle>Constraints</CardTitle>
@@ -188,7 +188,7 @@ function CodeEditor() {
 
       {/* CODE EDITOR */}
       <ResizablePanel defaultSize={60} maxSize={100}>
-        <div className="h-full relative">
+        <div className="relative h-full border-t border-white/10">
           <Editor
             height={"100%"}
             defaultLanguage={language}

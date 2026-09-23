@@ -178,13 +178,13 @@ function InterviewScheduleUI() {
   );
 
   return (
-    <div className="container max-w-7xl mx-auto p-6 space-y-8">
+    <div className="mx-auto min-h-[calc(100vh-4rem)] max-w-7xl space-y-8 px-1 py-8 sm:py-10">
       <div className="flex items-center justify-between">
         {/* HEADER INFO */}
         <div>
-          <h1 className="text-3xl font-bold">Interviews</h1>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground">Interviews</h1>
 
-          <p className="text-muted-foreground mt-1">
+          <p className="mt-2 text-sm text-muted-foreground">
             Schedule and manage interviews
           </p>
         </div>
@@ -195,9 +195,9 @@ function InterviewScheduleUI() {
             <Button size="lg">Schedule Interview</Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-[500px] h-[calc(100vh-200px)] overflow-auto">
+          <DialogContent className="h-[calc(100vh-160px)] overflow-auto border-border bg-background shadow-xl sm:max-w-[520px]">
             <DialogHeader>
-              <DialogTitle>Schedule Interview</DialogTitle>
+              <DialogTitle className="text-xl font-semibold text-foreground">Schedule Interview</DialogTitle>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
@@ -394,7 +394,7 @@ function InterviewScheduleUI() {
           </div>
         </div>
       ) : (
-        <div className="text-center py-12 text-muted-foreground">
+        <div className="surface-card rounded-2xl py-14 text-center">
           No interviews scheduled
         </div>
       )}
