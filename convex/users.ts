@@ -1,53 +1,76 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-//create the user
 export const syncUser = mutation({
   args: {
     name: v.string(),
     email: v.string(),
     clerkId: v.string(),
     image: v.optional(v.string()),
+    role: v.union(v.literal("candidate"), v.literal("interviewer")),
   },
   handler: async (ctx, args) => {
-
-    //for check existing user
     const existingUser = await ctx.db
       .query("users")
-      .filter((q) => q.eq(q.field("clerkId"), args.clerkId))
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
-    if (existingUser) return;
+    if (existingUser) {
+      if (
+        existingUser.name !== args.name ||
+        existingUser.email !== args.email ||
+        existingUser.image !== args.image
+      ) {
+        await ctx.db.patch(existingUser._id, {
+          name: args.name,
+          email: args.email,
+          image: args.image,
+        });
+      }
+      return existingUser._id;
+    }
 
-    //else create new user with interviewer
-    return await ctx.db.insert("users", {
-      ...args,
-      role: "interviewer",
-    });
+    return await ctx.db.insert("users", args);
   },
 });
 
-//for get all user
+export const getCurrentUser = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return null;
+
+    return await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
+      .first();
+  },
+});
+
 export const getUsers = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("User is not authenticated");
 
-    const users = await ctx.db.query("users").collect();
+    const currentUser = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
+      .first();
 
-    return users;
+    if (!currentUser) throw new Error("User profile not found");
+    if (currentUser.role !== "interviewer") {
+      throw new Error("Only interviewers can view users");
+    }
+
+    return await ctx.db.query("users").collect();
   },
 });
 
-//get specific user by clerk id
 export const getUserByClerkId = query({
   args: { clerkId: v.string() },
   handler: async (ctx, args) => {
-    const user = await ctx.db
+    return await ctx.db
       .query("users")
       .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
       .first();
-
-    return user;
   },
 });
