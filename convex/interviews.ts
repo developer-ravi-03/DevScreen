@@ -44,6 +44,32 @@ export const getMyInterviews = query({
   },
 });
 
+export const getMeetingAccess = query({
+  args: { streamCallId: v.string() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return { isScheduled: false, isAuthorized: false };
+    }
+
+    const interview = await ctx.db
+      .query("interviews")
+      .withIndex("by_stream_call_id", (q) =>
+        q.eq("streamCallId", args.streamCallId)
+      )
+      .first();
+
+    if (!interview) {
+      return { isScheduled: false, isAuthorized: true };
+    }
+
+    return {
+      isScheduled: true,
+      isAuthorized: canAccessInterview(interview, identity.subject),
+    };
+  },
+});
+
 export const getInterviewByStreamCallId = query({
   args: { streamCallId: v.string() },
   handler: async (ctx, args) => {
