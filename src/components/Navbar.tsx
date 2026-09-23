@@ -7,8 +7,8 @@ import DasboardBtn from "./DasboardBtn";
 import { useUserRole } from "@/hooks/useUserRole";
 
 function Navbar() {
-  const { isCandidate, isLoading } = useUserRole();
-  const showDashboard = !isCandidate && !isLoading;
+  const { isInterviewer, isLoading } = useUserRole();
+  const showDashboard = isInterviewer && !isLoading;
 
   return (
     <nav className="relative bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-cyan-500/20 overflow-hidden">

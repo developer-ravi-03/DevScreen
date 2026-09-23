@@ -1,6 +1,9 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
+import { useUserRole } from "@/hooks/useUserRole";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 import toast from "react-hot-toast";
@@ -33,14 +36,22 @@ import CommentDialog from "@/components/CommentDialog";
 type Interview = Doc<"interviews">;
 
 function DashboardPage() {
+  const router = useRouter();
+  const { isInterviewer, isLoading: isRoleLoading } = useUserRole();
   const users = useQuery(api.users.getUsers);
-  const interviews = useQuery(api.interviews.getAllInterviews);
+  const interviews = useQuery(api.interviews.getMyInterviews);
   const updateStatus = useMutation(api.interviews.updateInterviewStatus);
+
+  useEffect(() => {
+    if (!isRoleLoading && !isInterviewer) {
+      router.replace("/");
+    }
+  }, [isRoleLoading, isInterviewer, router]);
 
   //status handle pass or fail
   const handleStatusUpdate = async (
     interviewId: Id<"interviews">,
-    status: string
+    status: string,
   ) => {
     try {
       await updateStatus({ id: interviewId, status });
@@ -50,17 +61,21 @@ function DashboardPage() {
     }
   };
 
-  if (!interviews || !users) return <LoaderUI />;
+  if (isRoleLoading || !isInterviewer || !interviews || !users)
+    return <LoaderUI />;
 
   const groupedInterviews = groupInterviews(interviews);
 
   // Calculate stats
+  // Calculate stats
   const totalInterviews = interviews.length;
+
   const completedInterviews = interviews.filter(
-    (i) => i.status === "completed"
+    (i: Interview) => i.status === "completed",
   ).length;
+
   const successfulInterviews = interviews.filter(
-    (i) => i.status === "succeeded"
+    (i: Interview) => i.status === "succeeded",
   ).length;
 
   return (
@@ -133,7 +148,7 @@ function DashboardPage() {
                   <p className="text-3xl font-bold">
                     {completedInterviews > 0
                       ? Math.round(
-                          (successfulInterviews / completedInterviews) * 100
+                          (successfulInterviews / completedInterviews) * 100,
                         )
                       : 0}
                     %
@@ -171,7 +186,7 @@ function DashboardPage() {
                       (interview: Interview) => {
                         const candidateInfo = getCandidateInfo(
                           users,
-                          interview.candidateId
+                          interview.candidateId,
                         );
                         const startTime = new Date(interview.startTime);
 
@@ -235,7 +250,7 @@ function DashboardPage() {
                                     onClick={() =>
                                       handleStatusUpdate(
                                         interview._id,
-                                        "succeeded"
+                                        "succeeded",
                                       )
                                     }
                                   >
@@ -249,7 +264,7 @@ function DashboardPage() {
                                     onClick={() =>
                                       handleStatusUpdate(
                                         interview._id,
-                                        "failed"
+                                        "failed",
                                       )
                                     }
                                   >
@@ -263,11 +278,11 @@ function DashboardPage() {
                             </CardFooter>
                           </Card>
                         );
-                      }
+                      },
                     )}
                   </div>
                 </section>
-              )
+              ),
           )}
         </div>
 

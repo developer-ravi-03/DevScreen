@@ -1,18 +1,26 @@
 "use client";
+
 import LoaderUI from "@/components/LoaderUI";
 import MeetingRoom from "@/components/MeetingRoom";
 import MeetingSetup from "@/components/MeetingSetup";
 import useGetCallById from "@/hooks/useGetCallById";
-import { useUser } from "@clerk/nextjs";
 import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "../../../../../convex/_generated/api";
 
 function MeetingPage() {
   const params = useParams();
   const id = typeof params.id === "string" ? params.id : undefined;
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
 
-  const { isLoaded } = useUser();
+  const access = useQuery(
+    api.interviews.getMeetingAccess,
+    id ? { streamCallId: id } : "skip"
+  );
+
+  const { call, isCallLoading } = useGetCallById(id || "");
 
   if (!id) {
     return (
@@ -22,10 +30,20 @@ function MeetingPage() {
     );
   }
 
-  const { call, isCallLoading } = useGetCallById(id);
-  const [isSetupComplete, setIsSetupComplete] = useState(false);
+  if (access === undefined || isCallLoading) return <LoaderUI />;
 
-  if (!isLoaded || isCallLoading) return <LoaderUI />;
+  if (access.isScheduled && !access.isAuthorized) {
+    return (
+      <div className="h-screen flex items-center justify-center p-6 text-center">
+        <div className="space-y-3">
+          <p className="text-2xl font-semibold">Access denied</p>
+          <p className="text-muted-foreground">
+            You are not a candidate or interviewer assigned to this interview.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (!call) {
     return (

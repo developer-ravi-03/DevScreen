@@ -90,3 +90,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - 🔗 **LinkedIn** - [ItzRavi](https://www.linkedin.com/in/itzravi/)
 - 🌐 **Portfolio** - [Ravi Kumar](https://portfolio-website-next-hazel.vercel.app/)
+
+## 🔐 Roles & Interview Access
+
+New accounts complete a one-time role selection as either **Candidate** or **Interviewer**. New accounts default to Candidate until the role is explicitly selected.
+
+Scheduled interviews are scoped to the **candidate and assigned interviewers**. The interviewer who schedules an interview is automatically stored as its owner and must also be an assigned interviewer. Other interviewers do not receive that interview in the dashboard or schedule view.
+
+Backend access checks also protect scheduled interview details, feedback, and meeting deep links. Knowing a meeting ID alone is not enough to access a scheduled interview through the application.
