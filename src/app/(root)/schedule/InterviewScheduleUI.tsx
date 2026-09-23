@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/nextjs";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useMutation, useQuery } from "convex/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../../../convex/_generated/api";
 import toast from "react-hot-toast";
 import {
@@ -33,7 +33,7 @@ function InterviewScheduleUI() {
   const [open, setOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
-  const interviews = useQuery(api.interviews.getAllInterviews) ?? [];
+  const interviews = useQuery(api.interviews.getMyInterviews) ?? [];
   const users = useQuery(api.users.getUsers) ?? [];
   const createInterview = useMutation(api.interviews.createInterview);
 
@@ -48,6 +48,16 @@ function InterviewScheduleUI() {
     candidateId: "",
     interviewerIds: user?.id ? [user.id] : [],
   });
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    setFormData((prev) =>
+      prev.interviewerIds.includes(user.id)
+        ? prev
+        : { ...prev, interviewerIds: [user.id, ...prev.interviewerIds] }
+    );
+  }, [user?.id]);
 
   //schedule meeting
   const scheduleMeeting = async () => {
@@ -73,6 +83,9 @@ function InterviewScheduleUI() {
       await call.getOrCreate({
         data: {
           starts_at: meetingDate.toISOString(),
+          members: [
+            ...new Set([candidateId, ...interviewerIds]),
+          ].map((userId) => ({ user_id: userId })),
           custom: {
             description: title,
             additionalDetails: description,
