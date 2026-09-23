@@ -1,6 +1,9 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
+import { useUserRole } from "@/hooks/useUserRole";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 import toast from "react-hot-toast";
@@ -33,9 +36,17 @@ import CommentDialog from "@/components/CommentDialog";
 type Interview = Doc<"interviews">;
 
 function DashboardPage() {
+  const router = useRouter();
+  const { isInterviewer, isLoading: isRoleLoading } = useUserRole();
   const users = useQuery(api.users.getUsers);
-  const interviews = useQuery(api.interviews.getAllInterviews);
+  const interviews = useQuery(api.interviews.getMyInterviews);
   const updateStatus = useMutation(api.interviews.updateInterviewStatus);
+
+  useEffect(() => {
+    if (!isRoleLoading && !isInterviewer) {
+      router.replace("/");
+    }
+  }, [isRoleLoading, isInterviewer, router]);
 
   //status handle pass or fail
   const handleStatusUpdate = async (
@@ -50,7 +61,7 @@ function DashboardPage() {
     }
   };
 
-  if (!interviews || !users) return <LoaderUI />;
+  if (isRoleLoading || !isInterviewer || !interviews || !users) return <LoaderUI />;
 
   const groupedInterviews = groupInterviews(interviews);
 
