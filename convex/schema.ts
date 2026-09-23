@@ -8,6 +8,7 @@ export default defineSchema({
     image: v.optional(v.string()),
     role: v.union(v.literal("candidate"), v.literal("interviewer")),
     clerkId: v.string(),
+    roleSelected: v.optional(v.boolean()),
   }).index("by_clerk_id", ["clerkId"]),
 
   interviews: defineTable({
@@ -19,7 +20,7 @@ export default defineSchema({
     streamCallId: v.string(),
     candidateId: v.string(),
     interviewerIds: v.array(v.string()),
-    createdBy: v.string(),
+    createdBy: v.optional(v.string()),
   })
     .index("by_candidate_id", ["candidateId"])
     .index("by_stream_call_id", ["streamCallId"])
